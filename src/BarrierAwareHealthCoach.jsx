@@ -1,7 +1,10 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Activity, Clock, DollarSign, Users, Heart, TrendingUp, AlertCircle, CheckCircle, ArrowRight } from 'lucide-react';
 
 export default function BarrierAwareHealthCoach() {
+    useEffect(() => {
+        document.title = 'Barrier-Aware Health Coach';
+    }, []);
     const [step, setStep] = useState('intake');
     const [userProfile, setUserProfile] = useState({
         healthGoal: '',
@@ -175,42 +178,81 @@ export default function BarrierAwareHealthCoach() {
 
     return (
         <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 p-4 md:p-8">
-            <div className="max-w-6xl mx-auto">
-                <div className="text-center mb-8">
-                    <div className="flex items-center justify-center gap-2 mb-4">
-                        <Heart className="w-8 h-8 text-blue-600" />
-                        <h1 className="text-4xl font-bold text-gray-900">Barrier-Aware Health Coach</h1>
+            <div className="max-w-5xl mx-auto space-y-8 md:space-y-10">
+                <header className="relative overflow-hidden rounded-2xl mb-8">
+                    <div className="absolute inset-0 bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 opacity-10"></div>
+                    <div className="relative px-6 py-10 md:px-10 md:py-12 bg-white/60 backdrop-blur-sm rounded-2xl border border-indigo-100">
+                        <div className="flex items-center justify-center gap-3 mb-3">
+                            <div className="p-2 rounded-xl bg-blue-50 border border-blue-100">
+                                <Heart className="w-7 h-7 text-blue-600" />
+                            </div>
+                            <span className="text-xs font-semibold tracking-wide text-blue-700 bg-blue-50 border border-blue-100 px-2.5 py-1 rounded">
+                                Barrier-Aware
+                            </span>
+                        </div>
+                        <h1 className="text-3xl md:text-5xl font-extrabold text-gray-900 text-center tracking-tight">
+                            Health Coaching that Fits Your Real Life
+                        </h1>
+                        <p className="mt-4 text-base md:text-lg text-gray-600 max-w-2xl mx-auto text-center">
+                            Personalized guidance that adapts to your schedule, budget, family, and environment—
+                            not the other way around.
+                        </p>
                     </div>
-                    <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-                        AI-powered health coaching that adapts to your real-world constraints. 
-                        Because one-size-fits-all advice doesn't work.
-                    </p>
-                </div>
+                </header>
 
-                <div className="flex items-center justify-center gap-4 mb-8">
-                    <div className={`flex items-center gap-2 ${step === 'intake' ? 'text-blue-600' : 'text-gray-400'}`}>
-                        <div className={`w-8 h-8 rounded-full flex items-center justify-center ${step === 'intake' ? 'bg-blue-600 text-white' : 'bg-gray-200'}`}>1</div>
-                        <span className="hidden md:inline">Your Context</span>
-                    </div>
-                    <div className="w-12 h-0.5 bg-gray-300"></div>
-                    <div className={`flex items-center gap-2 ${step === 'wearable' ? 'text-blue-600' : 'text-gray-400'}`}>
-                        <div className={`w-8 h-8 rounded-full flex items-center justify-center ${step === 'wearable' ? 'bg-blue-600 text-white' : 'bg-gray-200'}`}>2</div>
-                        <span className="hidden md:inline">Health Data</span>
-                    </div>
-                    <div className="w-12 h-0.5 bg-gray-300"></div>
-                    <div className={`flex items-center gap-2 ${step === 'results' ? 'text-blue-600' : 'text-gray-400'}`}>
-                        <div className={`w-8 h-8 rounded-full flex items-center justify-center ${step === 'results' ? 'bg-blue-600 text-white' : 'bg-gray-200'}`}>3</div>
-                        <span className="hidden md:inline">Your Plan</span>
-                    </div>
-                </div>
+                <nav aria-label="Progress" className="mb-8">
+                    <ol role="list" className="flex items-center justify-center gap-4">
+                        <li role="listitem">
+                            <button
+                                type="button"
+                                onClick={() => setStep('intake')}
+                                aria-current={step === 'intake' ? 'step' : undefined}
+                                className={`group inline-flex items-center gap-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 rounded-full px-1 py-1 ${step === 'intake' ? 'text-blue-700' : 'text-gray-500'}`}
+                                title="Your Context"
+                            >
+                                <span className={`w-8 h-8 rounded-full flex items-center justify-center border ${step === 'intake' ? 'bg-blue-600 text-white border-blue-600' : 'bg-gray-100 border-gray-300 group-hover:border-gray-400'}`}>1</span>
+                                <span className="hidden md:inline text-sm font-medium">Your Context</span>
+                            </button>
+                        </li>
+                        <li aria-hidden="true" className="w-12 h-0.5 bg-gray-300" />
+                        <li role="listitem">
+                            <button
+                                type="button"
+                                onClick={() => setStep('wearable')}
+                                aria-current={step === 'wearable' ? 'step' : undefined}
+                                className={`group inline-flex items-center gap-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 rounded-full px-1 py-1 ${step === 'wearable' ? 'text-blue-700' : 'text-gray-500'}`}
+                                title="Health Data"
+                            >
+                                <span className={`w-8 h-8 rounded-full flex items-center justify-center border ${step === 'wearable' ? 'bg-blue-600 text-white border-blue-600' : 'bg-gray-100 border-gray-300 group-hover:border-gray-400'}`}>2</span>
+                                <span className="hidden md:inline text-sm font-medium">Health Data</span>
+                            </button>
+                        </li>
+                        <li aria-hidden="true" className="w-12 h-0.5 bg-gray-300" />
+                        <li role="listitem">
+                            <button
+                                type="button"
+                                onClick={() => {
+                                    if (recommendations) setStep('results');
+                                }}
+                                disabled={!recommendations}
+                                aria-current={step === 'results' ? 'step' : undefined}
+                                className={`group inline-flex items-center gap-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 rounded-full px-1 py-1 ${step === 'results' ? 'text-blue-700' : 'text-gray-500'} ${!recommendations ? 'opacity-50 cursor-not-allowed' : ''}`}
+                                title="Your Plan"
+                            >
+                                <span className={`w-8 h-8 rounded-full flex items-center justify-center border ${step === 'results' ? 'bg-blue-600 text-white border-blue-600' : 'bg-gray-100 border-gray-300 group-hover:border-gray-400'}`}>3</span>
+                                <span className="hidden md:inline text-sm font-medium">Your Plan</span>
+                            </button>
+                        </li>
+                    </ol>
+                </nav>
 
                 {step === 'intake' && (
                     <div className="bg-white rounded-2xl shadow-lg p-6 md:p-8">
-                        <h2 className="text-2xl font-bold text-gray-900 mb-6">Tell us about your real-world context</h2>
+                        <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4 md:mb-6">Tell us about your real-world context</h2>
 
                         <div className="space-y-6">
                             <div>
-                                <label className="block text-sm font-medium text-gray-700 mb-2">
+                                        <label className="block text-sm md:text-base font-medium text-gray-800 mb-2">
                                     What's your main health goal?
                                 </label>
                                 <textarea
@@ -223,7 +265,7 @@ export default function BarrierAwareHealthCoach() {
                             </div>
 
                             <div>
-                                <label className="block text-sm font-medium text-gray-700 mb-2">
+                                        <label className="block text-sm md:text-base font-medium text-gray-800 mb-2">
                                     <Clock className="w-4 h-4 inline mr-1" />
                                     What's your work schedule like?
                                 </label>
@@ -243,7 +285,7 @@ export default function BarrierAwareHealthCoach() {
                             </div>
 
                             <div>
-                                <label className="block text-sm font-medium text-gray-700 mb-2">
+                                        <label className="block text-sm md:text-base font-medium text-gray-800 mb-2">
                                     <DollarSign className="w-4 h-4 inline mr-1" />
                                     What's your budget for health/wellness?
                                 </label>
@@ -261,7 +303,7 @@ export default function BarrierAwareHealthCoach() {
                             </div>
 
                             <div>
-                                <label className="block text-sm font-medium text-gray-700 mb-2">
+                                        <label className="block text-sm md:text-base font-medium text-gray-800 mb-2">
                                     <Users className="w-4 h-4 inline mr-1" />
                                     Family situation
                                 </label>
@@ -280,7 +322,7 @@ export default function BarrierAwareHealthCoach() {
                             </div>
 
                             <div>
-                                <label className="block text-sm font-medium text-gray-700 mb-2">
+                                        <label className="block text-sm md:text-base font-medium text-gray-800 mb-2">
                                     <Activity className="w-4 h-4 inline mr-1" />
                                     Your neighborhood
                                 </label>
@@ -299,7 +341,7 @@ export default function BarrierAwareHealthCoach() {
                             </div>
 
                             <div>
-                                <label className="block text-sm font-medium text-gray-700 mb-2">
+                                        <label className="block text-sm md:text-base font-medium text-gray-800 mb-2">
                                     Transportation access
                                 </label>
                                 <select
@@ -328,15 +370,15 @@ export default function BarrierAwareHealthCoach() {
 
                 {step === 'wearable' && (
                     <div className="bg-white rounded-2xl shadow-lg p-6 md:p-8">
-                        <h2 className="text-2xl font-bold text-gray-900 mb-2">Your Health Data</h2>
-                        <p className="text-gray-600 mb-6">
+                        <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-2">Your Health Data</h2>
+                        <p className="text-gray-600 text-sm md:text-base mb-6">
                             Adjust these sliders to simulate what your wearable (Apple Watch, Oura, Garmin, etc.) might show
                         </p>
 
                         <div className="space-y-8">
                             <div>
                                 <div className="flex justify-between items-center mb-2">
-                                    <label className="text-sm font-medium text-gray-700">Sleep Score</label>
+                                            <label className="text-sm md:text-base font-medium text-gray-800">Sleep Score</label>
                                     <span className={`text-2xl font-bold ${wearableData.sleepScore >= 70 ? 'text-green-600' : 'text-orange-600'}`}>
                                         {wearableData.sleepScore}
                                     </span>
@@ -357,7 +399,7 @@ export default function BarrierAwareHealthCoach() {
 
                             <div>
                                 <div className="flex justify-between items-center mb-2">
-                                    <label className="text-sm font-medium text-gray-700">Activity Level</label>
+                                            <label className="text-sm md:text-base font-medium text-gray-800">Activity Level</label>
                                     <span className={`text-2xl font-bold ${wearableData.activityLevel >= 60 ? 'text-green-600' : 'text-orange-600'}`}>
                                         {wearableData.activityLevel}
                                     </span>
@@ -378,7 +420,7 @@ export default function BarrierAwareHealthCoach() {
 
                             <div>
                                 <div className="flex justify-between items-center mb-2">
-                                    <label className="text-sm font-medium text-gray-700">Stress Level</label>
+                                            <label className="text-sm md:text-base font-medium text-gray-800">Stress Level</label>
                                     <span className={`text-2xl font-bold ${wearableData.stressLevel <= 40 ? 'text-green-600' : 'text-orange-600'}`}>
                                         {wearableData.stressLevel}
                                     </span>
@@ -399,7 +441,7 @@ export default function BarrierAwareHealthCoach() {
 
                             <div>
                                 <div className="flex justify-between items-center mb-2">
-                                    <label className="text-sm font-medium text-gray-700">Heart Rate Variability (HRV)</label>
+                                            <label className="text-sm md:text-base font-medium text-gray-800">Heart Rate Variability (HRV)</label>
                                     <span className={`text-2xl font-bold ${wearableData.heartRateVariability >= 60 ? 'text-green-600' : 'text-orange-600'}`}>
                                         {wearableData.heartRateVariability}
                                     </span>
@@ -444,10 +486,10 @@ export default function BarrierAwareHealthCoach() {
                 )}
 
                 {step === 'results' && recommendations && (
-                    <div className="space-y-6">
+                            <div className="space-y-6">
                         <div className="bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl shadow-lg p-6 md:p-8 text-white">
-                            <h2 className="text-3xl font-bold mb-4">The Problem with Generic Health Advice</h2>
-                            <p className="text-lg opacity-90">
+                            <h2 className="text-2xl md:text-3xl font-bold mb-3 md:mb-4">The Problem with Generic Health Advice</h2>
+                            <p className="text-base md:text-lg opacity-90">
                                 Traditional health apps give everyone the same advice. But your life has real constraints - 
                                 time, money, responsibilities, environment. Generic advice fails because it ignores these barriers. 
                                 <span className="font-semibold"> Barrier-aware AI adapts recommendations to what's actually possible for YOU.</span>
@@ -455,12 +497,12 @@ export default function BarrierAwareHealthCoach() {
                         </div>
 
                         <div className="grid md:grid-cols-2 gap-6">
-                            <div className="bg-white rounded-2xl shadow-lg p-6">
+                                    <div className="bg-white rounded-2xl shadow-lg p-6 md:p-8">
                                 <div className="flex items-center gap-3 mb-4">
                                     <AlertCircle className="w-6 h-6 text-red-500" />
-                                    <h3 className="text-xl font-bold text-gray-900">Generic Health App</h3>
+                                            <h3 className="text-lg md:text-xl font-bold text-gray-900">Generic Health App</h3>
                                 </div>
-                                <p className="text-sm text-gray-600 mb-4">One-size-fits-all recommendations (typical 30% adherence rate)</p>
+                                        <p className="text-sm md:text-base text-gray-600 mb-4">One-size-fits-all recommendations (typical 30% adherence rate)</p>
                                 
                                 <div className="space-y-3">
                                     {recommendations.generic.map((rec, idx) => (
@@ -482,12 +524,12 @@ export default function BarrierAwareHealthCoach() {
                                 </div>
                             </div>
 
-                            <div className="bg-white rounded-2xl shadow-lg p-6 border-2 border-blue-500">
+                                    <div className="bg-white rounded-2xl shadow-lg p-6 md:p-8 border-2 border-blue-500">
                                 <div className="flex items-center gap-3 mb-4">
                                     <CheckCircle className="w-6 h-6 text-green-500" />
-                                    <h3 className="text-xl font-bold text-gray-900">Barrier-Aware AI Coach</h3>
+                                            <h3 className="text-lg md:text-xl font-bold text-gray-900">Barrier-Aware AI Coach</h3>
                                 </div>
-                                <p className="text-sm text-gray-600 mb-4">Personalized to YOUR real-world constraints (targets 60-70% adherence)</p>
+                                        <p className="text-sm md:text-base text-gray-600 mb-4">Personalized to YOUR real-world constraints (targets 60-70% adherence)</p>
                                 
                                 <div className="space-y-4">
                                     {recommendations.barrierAware.map((rec, idx) => (
@@ -515,9 +557,9 @@ export default function BarrierAwareHealthCoach() {
                             </div>
                         </div>
 
-                        <div className="bg-white rounded-2xl shadow-lg p-6 md:p-8">
-                            <h3 className="text-2xl font-bold text-gray-900 mb-4">Behavioral Economics Principles Applied</h3>
-                            <p className="text-gray-600 mb-6">
+                                <div className="bg-white rounded-2xl shadow-lg p-6 md:p-8">
+                            <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-3 md:mb-4">Behavioral Economics Principles Applied</h3>
+                            <p className="text-sm md:text-base text-gray-600 mb-6">
                                 These recommendations leverage proven psychological principles to drive behavior change:
                             </p>
                             
@@ -532,28 +574,28 @@ export default function BarrierAwareHealthCoach() {
                         </div>
 
                         <div className="bg-gradient-to-r from-green-50 to-emerald-50 rounded-2xl shadow-lg p-6 md:p-8 border border-green-200">
-                            <h3 className="text-2xl font-bold text-gray-900 mb-4">Business Impact</h3>
+                            <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-3 md:mb-4">Business Impact</h3>
                             <div className="grid md:grid-cols-3 gap-6">
                                 <div>
-                                    <div className="text-3xl font-bold text-green-600 mb-2">2-3x</div>
-                                    <p className="text-sm text-gray-700">Higher adherence rate vs generic coaching</p>
+                                    <div className="text-2xl md:text-3xl font-bold text-green-600 mb-1 md:mb-2">2-3x</div>
+                                    <p className="text-sm md:text-base text-gray-700">Higher adherence rate vs generic coaching</p>
                                 </div>
                                 <div>
-                                    <div className="text-3xl font-bold text-green-600 mb-2">40-50%</div>
-                                    <p className="text-sm text-gray-700">Reduction in user churn through personalization</p>
+                                    <div className="text-2xl md:text-3xl font-bold text-green-600 mb-1 md:mb-2">40-50%</div>
+                                    <p className="text-sm md:text-base text-gray-700">Reduction in user churn through personalization</p>
                                 </div>
                                 <div>
-                                    <div className="text-3xl font-bold text-green-600 mb-2">$$$</div>
-                                    <p className="text-sm text-gray-700">Expanded TAM to underserved populations</p>
+                                    <div className="text-2xl md:text-3xl font-bold text-green-600 mb-1 md:mb-2">$$$</div>
+                                    <p className="text-sm md:text-base text-gray-700">Expanded TAM to underserved populations</p>
                                 </div>
                             </div>
-                            <p className="mt-4 text-sm text-gray-600 italic">
+                            <p className="mt-4 text-sm md:text-base text-gray-600 italic">
                                 * Projected based on behavior change literature and digital health engagement studies
                             </p>
                         </div>
 
                         <div className="bg-white rounded-2xl shadow-lg p-6 md:p-8 text-center">
-                            <h3 className="text-2xl font-bold text-gray-900 mb-4">Ready to try a different profile?</h3>
+                            <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-3 md:mb-4">Ready to try a different profile?</h3>
                             <button
                                 onClick={() => {
                                     setStep('intake');
